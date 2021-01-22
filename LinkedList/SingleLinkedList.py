@@ -83,7 +83,38 @@ class LinkedList:
                 break
 
             itr = itr.next
-            count +=1     
+            count +=1
+
+    def InsertAfterValue(self, dataafter, data):
+        if dataafter is None:
+            raise Exception("Invalid Value")
+
+        if self.head.data==data:
+            self.head.next = Node(data,self.head.next)
+            return
+            
+        itr = self.head
+        while itr:
+            if itr.data == dataafter:
+                node = Node(data, itr.next)
+                itr.next = node
+                break
+            itr = itr.next
+    
+    def RemoveByValue(self, data):
+        if data is None:
+            raise Exception("Invalid Data")
+
+        if self.head.data == data:
+            self.head = self.head.next
+            return
+
+        itr = self.head
+        while itr.next:
+            if itr.next.data == data:
+                itr.next = itr.next.next
+                break
+            itr = itr.next 
 
 if __name__ == '__main__':
     ll = LinkedList()
@@ -92,5 +123,7 @@ if __name__ == '__main__':
     ll.Print()
     ll.InsertAt(0, "figs")
     ll.Print()
-    ll.InsertAt(2, "Jackfruit")
+    ll.InsertAfterValue("Banana", "Jackfruit")
+    ll.Print()
+    ll.RemoveByValue("Banana")
     ll.Print()
